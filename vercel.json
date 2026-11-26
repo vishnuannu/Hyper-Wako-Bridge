@@ -6,8 +6,8 @@
       "destination": "/api/manifest.json"
     },
     {
-      "source": "/:resource/:type/:id.json",
-      "destination": "/api/:resource/:type/:id.json"
+      "source": "/:path*",
+      "destination": "/api/:path*"
     }
   ]
 }
