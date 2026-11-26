@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "functions": {
+    "api/[...path].js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/manifest.json",
+      "destination": "/api/manifest.json"
+    },
+    {
+      "source": "/:resource/:type/:id.json",
+      "destination": "/api/:resource/:type/:id.json"
+    }
+  ]
+}
