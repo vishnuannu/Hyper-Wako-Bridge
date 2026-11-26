@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
 
   // Vercel catch-all route: /api/[...path]
   const urlPath = new URL(req.url, "https://bridge.local").pathname;
-  let requestedPath = urlPath.replace(/^\\/api\\//, "");
+  let requestedPath = urlPath.replace(/^\/api\//, "");
 
   if (!requestedPath || requestedPath === "api") {
     const parts = Array.isArray(req.query.path)
