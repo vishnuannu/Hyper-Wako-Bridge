@@ -16,10 +16,15 @@ module.exports = async (req, res) => {
   if (req.method !== "GET") return send(res, 405, { error: "GET only" });
 
   // Vercel catch-all route: /api/[...path]
-  const parts = Array.isArray(req.query.path)
-    ? req.query.path
-    : (req.query.path ? [req.query.path] : []);
-  const requestedPath = parts.join("/");
+  const urlPath = new URL(req.url, "https://bridge.local").pathname;
+  let requestedPath = urlPath.replace(/^\\/api\\//, "");
+
+  if (!requestedPath || requestedPath === "api") {
+    const parts = Array.isArray(req.query.path)
+      ? req.query.path
+      : (req.query.path ? [req.query.path] : []);
+    requestedPath = parts.join("/");
+  }
   const isManifest = requestedPath === "manifest.json";
 
   const upstreamUrl = `${UPSTREAM}${CONFIG_PATH}/${requestedPath}`;
